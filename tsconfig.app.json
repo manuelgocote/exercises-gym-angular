@@ -4,7 +4,11 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
+    "experimentalDecorators": true,
     "types": []
+  },
+  "angularCompilerOptions": {
+    "controlFlow": true
   },
   "files": [
     "src/main.ts"

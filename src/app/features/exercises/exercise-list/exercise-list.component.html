@@ -1,0 +1,16 @@
+<h2 class="text-xl font-bold mb-4">Listado de ejercicios</h2>
+
+@if (loading()) {
+  <div>Cargando ejercicios...</div>
+} @else {
+  <ul class="space-y-2">
+    @for (exercise of exercises(); track exercise.id) {
+      <li class="p-2 border rounded shadow-sm">
+        <strong>{{ exercise.name }}</strong>
+        <div class="text-sm text-gray-600">
+          Grupos musculares: {{ exercise.muscleGroup.join(', ') }}
+        </div>
+      </li>
+    }
+  </ul>
+}

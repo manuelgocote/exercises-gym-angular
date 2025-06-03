@@ -1,20 +1,27 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './core/guards/auth.guard';
+import { PublicGuard } from './core/guards/public.guard';
+
 
 export const appRoutes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./features/exercises/exercise-list/exercise-list.component')
-      .then(m => m.ExerciseListComponent)
+    loadComponent: () => import('./features/calendar/calendar.component')
+      .then(m => m.CalendarComponent),
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
     loadComponent: () => import('./features/auth/login/login.component')
-      .then(m => m.LoginComponent)
+      .then(m => m.LoginComponent),
+    canActivate: [PublicGuard]
+
   },
   {
     path: 'register',
     loadComponent: () => import('./features/auth/register/register.component')
-      .then(m => m.RegisterComponent)
+      .then(m => m.RegisterComponent),
+    canActivate: [PublicGuard]
   }
 
 ];

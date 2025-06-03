@@ -1,0 +1,9 @@
+<div class="max-w-4xl mx-auto p-4 h-screen overflow-hidden flex flex-col">
+  <h1 class="text-2xl font-bold mb-4 text-center">Calendario de Entrenamientos</h1>
+  <div class="flex-1 overflow-auto">
+    <full-calendar
+      [options]="calendarOptions"
+      (dateClick)="onDateClick($event)"
+    ></full-calendar>
+  </div>
+</div>

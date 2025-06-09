@@ -67,14 +67,14 @@ export class TrainingEditComponent implements OnInit {
   loadExistingData() {
     if (this.date === '2025-06-06') {
       // Simula que llegaron como IDs
-      this.form.patchValue({ muscleGroups: ['pecho', 'tríceps'] });
+      this.form.patchValue({ muscleGroups: ['pectoral', 'tríceps'] });
 
       this.exercises.push(
         this.createExercise('Press banca', [
           { reps: 12, weight: 20 },
           { reps: 10, weight: 22 },
           { reps: 8, weight: 26 },
-        ], 'pecho')
+        ], 'pectoral')
       );
       this.exerciseOptions.push([]);
 
@@ -82,7 +82,7 @@ export class TrainingEditComponent implements OnInit {
         this.createExercise('Extensión triceps', [
           { reps: 15, weight: 25 },
           { reps: 12, weight: 35 },
-        ], 'tríceps')
+        ], 'triceps')
       );
       this.exerciseOptions.push([]);
     }

@@ -1,10 +1,10 @@
-
 <app-header (menuToggle)="toggleMenu()"></app-header>
-<div class="flex min-h-screen">
-  @if (auth.isLoggedIn && menuOpen()) {
-    <app-side-menu (closeMenu)="toggleMenu()"></app-side-menu>
-  }
-  <main class="flex-1 p-4">
-    <router-outlet></router-outlet>
-  </main>
-</div>
+<main class="p-4 min-h-screen">
+  <router-outlet></router-outlet>
+</main>
+@if (auth.isLoggedIn && menuOpen()) {
+  <app-side-menu
+    class="fixed top-0 left-0 h-full z-50"
+    (closeMenu)="toggleMenu()"
+  ></app-side-menu>
+}

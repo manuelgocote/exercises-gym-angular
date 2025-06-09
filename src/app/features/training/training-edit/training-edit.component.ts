@@ -67,7 +67,7 @@ export class TrainingEditComponent implements OnInit {
   loadExistingData() {
     if (this.date === '2025-06-06') {
       // Simula que llegaron como IDs
-      this.form.patchValue({ muscleGroups: ['pectoral', 'tríceps'] });
+      this.form.patchValue({ muscleGroups: ['pectoral', 'triceps'] });
 
       this.exercises.push(
         this.createExercise('Press banca', [

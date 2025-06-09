@@ -1,4 +1,6 @@
+
 import { Component, EventEmitter, Output } from '@angular/core';
+
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -9,6 +11,8 @@ import { RouterModule } from '@angular/router';
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.scss'],
 })
+
 export class SideMenuComponent {
   @Output() closeMenu = new EventEmitter<void>();
 }
+

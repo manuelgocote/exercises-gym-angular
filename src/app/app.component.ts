@@ -1,3 +1,4 @@
+
 import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/components/header/header.component';
@@ -14,9 +15,11 @@ import { AuthService } from './core/services/auth.service';
 })
 export class AppComponent {
   auth = inject(AuthService);
+
   menuOpen = signal(false);
 
   toggleMenu() {
     this.menuOpen.update((v) => !v);
   }
+
 }

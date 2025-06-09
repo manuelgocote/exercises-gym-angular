@@ -42,4 +42,11 @@ export const appRoutes: Routes = [
         (m) => m.TrainingEditComponent
       ),
   },
+  {
+    path: 'add-training/:date',
+    loadComponent: () =>
+      import('./features/training/training-add/training-add.component').then(
+        (m) => m.TrainingAddComponent
+      ),
+  },
 ];

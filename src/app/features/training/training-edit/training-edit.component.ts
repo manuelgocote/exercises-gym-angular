@@ -9,6 +9,8 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MuscleGroupService } from '../../../core/services/muscle-group.service';
+import { ExerciseService } from '../../../core/services/exercise.service';
+import { Exercise } from '../../../shared/models/exercise.model';
 
 @Component({
   selector: 'app-training-edit',
@@ -21,17 +23,30 @@ export class TrainingEditComponent implements OnInit {
   private fb = inject(FormBuilder);
   private route = inject(ActivatedRoute);
   private muscleGroupService = inject(MuscleGroupService);
+  private exerciseService = inject(ExerciseService);
 
   date = '';
   form: FormGroup;
   availableMuscleGroups: string[] = [];
+  exerciseOptions: Exercise[][] = [];
+  exerciseQueries: string[] = [];
 
   constructor() {
     this.date = this.route.snapshot.paramMap.get('date')!;
     this.form = this.fb.group({
-      muscleGroups: [[], Validators.required], // Usamos array para select múltiple
+      muscleGroups: [[], Validators.required],
       exercises: this.fb.array([]),
     });
+  }
+
+  onMuscleGroupChange(event: Event) {
+    const select = event.target as HTMLSelectElement | null;
+    const group = select?.value;
+    if (!group) return;
+    this.addMuscleGroup(group);
+    if (select) {
+      select.value = '';
+    }
   }
 
   ngOnInit() {
@@ -59,20 +74,41 @@ export class TrainingEditComponent implements OnInit {
           { reps: 12, weight: 20 },
           { reps: 10, weight: 22 },
           { reps: 8, weight: 26 },
-        ])
+        ], 'pecho')
       );
+      this.exerciseOptions.push([]);
 
       this.exercises.push(
         this.createExercise('Extensión triceps', [
           { reps: 15, weight: 25 },
           { reps: 12, weight: 35 },
-        ])
+        ], 'tríceps')
       );
+      this.exerciseOptions.push([]);
     }
   }
 
-  createExercise(name = '', sets: { reps: number; weight: number }[] = []) {
+  addMuscleGroup(group: string) {
+    if (!group) return;
+    const current = this.form.value.muscleGroups as string[];
+    if (!current.includes(group)) {
+      this.form.patchValue({ muscleGroups: [...current, group] });
+    }
+  }
+
+  removeMuscleGroup(index: number) {
+    const current = this.form.value.muscleGroups as string[];
+    current.splice(index, 1);
+    this.form.patchValue({ muscleGroups: [...current] });
+  }
+
+  createExercise(
+    name = '',
+    sets: { reps: number; weight: number }[] = [],
+    muscleGroup = ''
+  ) {
     return this.fb.group({
+      muscleGroup: [muscleGroup, Validators.required],
       name: [name, Validators.required],
       sets: this.fb.array(
         sets.map((set) =>
@@ -87,10 +123,12 @@ export class TrainingEditComponent implements OnInit {
 
   addExercise() {
     this.exercises.push(this.createExercise());
+    this.exerciseOptions.push([]);
   }
 
   removeExercise(index: number) {
     this.exercises.removeAt(index);
+    this.exerciseOptions.splice(index, 1);
   }
 
   getSets(exerciseIndex: number) {
@@ -108,6 +146,28 @@ export class TrainingEditComponent implements OnInit {
 
   removeSet(exerciseIndex: number, setIndex: number) {
     this.getSets(exerciseIndex).removeAt(setIndex);
+  }
+
+  onExerciseGroupChange(index: number) {
+    this.exercises.at(index).patchValue({ name: '' });
+    this.exerciseOptions[index] = [];
+  }
+
+  onExerciseSearch(index: number, query: string) {
+    this.exerciseQueries[index] = query;
+    const group = this.exercises.at(index).value.muscleGroup;
+    if (!group || !query) {
+      this.exerciseOptions[index] = [];
+      return;
+    }
+    this.exerciseService
+      .searchByMuscleGroup(group, query)
+      .subscribe((res) => (this.exerciseOptions[index] = res));
+  }
+
+  selectExercise(index: number, exercise: Exercise) {
+    this.exercises.at(index).patchValue({ name: exercise.name });
+    this.exerciseOptions[index] = [];
   }
 
   save() {

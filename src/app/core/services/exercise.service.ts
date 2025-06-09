@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Exercise } from '../../shared/models/exercise.model';
 
@@ -15,6 +15,11 @@ export class ExerciseService {
 
   getMuscleGroups(): Observable<string[]> {
     return this.http.get<string[]>(`${this.baseUrl}/muscle-groups`);
+  }
+
+  searchByMuscleGroup(muscleGroup: string, query: string): Observable<Exercise[]> {
+    const params = new HttpParams().set('muscleGroup', muscleGroup).set('q', query);
+    return this.http.get<Exercise[]>(this.baseUrl, { params });
   }
 
 

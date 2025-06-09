@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
@@ -11,6 +11,7 @@ import { AuthService } from '../../../core/services/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  @Output() menuToggle = new EventEmitter<void>();
   constructor(public auth: AuthService) {}
 
   logout() {

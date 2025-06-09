@@ -1,5 +1,15 @@
 <header class="flex items-center justify-between p-4 bg-gray-800 text-white">
-  <div class="text-xl font-bold">GYM APP</div>
+  <div class="flex items-center">
+    @if (auth.isLoggedIn) {
+      <button
+        (click)="menuToggle.emit()"
+        class="mr-2 bg-gray-700 hover:bg-gray-600 px-2 py-1 rounded"
+      >
+        ☰
+      </button>
+    }
+    <div class="text-xl font-bold">GYM APP</div>
+  </div>
   @if(auth.isLoggedIn) {
   <div>
     Bienvenido, {{ auth.user?.username }}

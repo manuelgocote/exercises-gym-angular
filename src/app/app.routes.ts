@@ -6,9 +6,22 @@ import { TrainingEditComponent } from './features/training/training-edit/trainin
 export const appRoutes: Routes = [
   {
     path: '',
+    redirectTo: 'calendar',
+    pathMatch: 'full'
+  },
+  {
+    path: 'calendar',
     loadComponent: () =>
       import('./features/calendar/calendar.component').then(
         (m) => m.CalendarComponent
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'exercises',
+    loadComponent: () =>
+      import('./features/exercises/exercise-list/exercise-list.component').then(
+        (m) => m.ExerciseListComponent
       ),
     canActivate: [AuthGuard],
   },

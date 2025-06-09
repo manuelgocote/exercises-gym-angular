@@ -1,2 +1,9 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
+<app-header (menuToggle)="toggleMenu()"></app-header>
+<div class="flex min-h-screen">
+  @if (auth.isLoggedIn && menuOpen()) {
+    <app-side-menu (closeMenu)="toggleMenu()"></app-side-menu>
+  }
+  <main class="flex-1 p-4">
+    <router-outlet></router-outlet>
+  </main>
+</div>

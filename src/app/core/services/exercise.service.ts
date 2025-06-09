@@ -12,4 +12,10 @@ export class ExerciseService {
   getAll(): Observable<Exercise[]> {
     return this.http.get<Exercise[]>(this.baseUrl);
   }
+
+  getMuscleGroups(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.baseUrl}/muscle-groups`);
+  }
+
+
 }

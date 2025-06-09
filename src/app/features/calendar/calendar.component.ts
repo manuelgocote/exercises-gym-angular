@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
 import { CalendarOptions, EventClickArg } from '@fullcalendar/core';
 
 @Component({
@@ -14,8 +15,10 @@ import { CalendarOptions, EventClickArg } from '@fullcalendar/core';
 })
 export class CalendarComponent {
   calendarOptions: CalendarOptions = {
-    plugins: [dayGridPlugin],
+    plugins: [dayGridPlugin, interactionPlugin],
     initialView: 'dayGridMonth',
+    height: 'auto',
+    dateClick: this.onDateClick.bind(this),
     events: [
       { title: 'Entreno A', date: '2025-06-03', color: '#4ade80' },
       { title: 'Entreno B', date: '2025-06-05', color: '#facc15' }
@@ -25,6 +28,7 @@ export class CalendarComponent {
   constructor(private router: Router) {}
 
   onDateClick(arg: any) {
-    this.router.navigate(['/entreno', arg.dateStr]);
+    const fecha = arg.dateStr; // formato YYYY-MM-DD
+    this.router.navigate(['/training', fecha]);
   }
 }

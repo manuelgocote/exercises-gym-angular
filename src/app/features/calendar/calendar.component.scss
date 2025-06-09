@@ -1,9 +1,12 @@
+:host {
+  display: block;
+  overflow-x: hidden;
+}
+
 :host ::ng-deep .fc {
   max-width: 100%;
   font-family: 'Inter', sans-serif;
-  color: #1f2937; /* text-gray-800 */
-  max-height: 80vh;
-  overflow-y: auto;
+  color: #1f2937; // text-gray-800
 }
 
 :host ::ng-deep .fc .fc-daygrid-day {
@@ -12,15 +15,5 @@
 }
 
 :host ::ng-deep .fc .fc-daygrid-day:hover {
-  background-color: #e0f2fe; /* light blue */
-}
-
-
-
-:host ::ng-deep .fc {
-  max-height: 100%;
-}
-
-:host ::ng-deep .fc .fc-scrollgrid {
-  height: 100%;
+  background-color: #e0f2fe; // light blue
 }

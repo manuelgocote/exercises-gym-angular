@@ -66,4 +66,8 @@ export class TrainingDetailComponent {
     this.router.navigate(['/edit-training', this.selectedDate]);
   }
 
+  crearEntrenamiento() {
+    this.router.navigate(['/add-training', this.selectedDate]);
+  }
+
 }

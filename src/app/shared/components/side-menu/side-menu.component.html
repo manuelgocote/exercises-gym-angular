@@ -1,4 +1,10 @@
 <nav class="w-48 bg-gray-100 p-4 h-full">
+
+  <button
+    (click)="closeMenu.emit()"
+    class="mb-4 text-sm text-gray-700 hover:underline"
+  >Cerrar</button>
+
   <ul class="space-y-2">
     <li>
       <a routerLink="/calendar" routerLinkActive="font-bold" class="block">Calendario</a>

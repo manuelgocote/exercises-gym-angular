@@ -1,14 +1,30 @@
-<nav class="w-48 bg-gray-100 p-4 h-full shadow-lg">
+<nav
+  class="w-56 bg-gray-800 text-white p-4 h-full shadow-lg"
+  [@slideInOut]
+>
   <button
     (click)="closeMenu.emit()"
-    class="mb-4 text-sm text-gray-700 hover:underline"
-  >Cerrar</button>
+    class="mb-4 mr-2 bg-gray-700 hover:bg-gray-600 px-2 py-1 rounded"
+  >
+    ☰
+  </button>
+  <div class="mb-4">Bienvenido, {{ auth.user?.username }}</div>
+  <button
+    (click)="logout()"
+    class="mb-6 bg-red-600 hover:bg-red-700 px-3 py-1 rounded"
+  >
+    Cerrar sesión
+  </button>
   <ul class="space-y-2">
     <li>
-      <a (click)="closeMenu.emit()" routerLink="/calendar" routerLinkActive="font-bold" class="block">Calendario</a>
+      <a (click)="closeMenu.emit()" routerLink="/calendar" routerLinkActive="font-bold" class="block">
+        <span class="mr-2">📅</span> Calendario
+      </a>
     </li>
     <li>
-      <a (click)="closeMenu.emit()" routerLink="/exercises" routerLinkActive="font-bold" class="block">Ejercicios</a>
+      <a (click)="closeMenu.emit()" routerLink="/exercises" routerLinkActive="font-bold" class="block">
+        <span class="mr-2">🏋️‍♂️</span> Ejercicios
+      </a>
     </li>
   </ul>
 </nav>

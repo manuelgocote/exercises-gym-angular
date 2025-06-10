@@ -13,8 +13,4 @@ import { AuthService } from '../../../core/services/auth.service';
 export class HeaderComponent {
   @Output() menuToggle = new EventEmitter<void>();
   constructor(public auth: AuthService) {}
-
-  logout() {
-    this.auth.logout();
-  }
 }

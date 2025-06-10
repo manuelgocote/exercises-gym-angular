@@ -1,28 +1,18 @@
-<header class="flex items-center justify-between p-4 bg-gray-800 text-white">
-  <div class="flex items-center">
-    @if (auth.isLoggedIn) {
-      <button
-        (click)="menuToggle.emit()"
-        class="mr-2 bg-gray-700 hover:bg-gray-600 px-2 py-1 rounded"
-      >
-        ☰
-      </button>
-    }
-    <div class="text-xl font-bold">GYM APP</div>
-  </div>
-  @if(auth.isLoggedIn) {
-  <div>
-    Bienvenido, {{ auth.user?.username }}
+<header class="relative flex items-center justify-center p-4 bg-gray-800 text-white">
+  @if (auth.isLoggedIn) {
     <button
-      (click)="logout()"
-      class="ml-4 bg-red-600 hover:bg-red-700 px-3 py-1 rounded"
+      (click)="menuToggle.emit()"
+      class="absolute left-4 bg-gray-700 hover:bg-gray-600 px-2 py-1 rounded"
     >
-      Cerrar sesión
+      ☰
     </button>
-  </div>
-  } @else {
-  <a routerLink="/login" class="text-blue-300 hover:underline"
-    >Iniciar sesión</a
-  >
+  }
+  <div class="text-xl font-bold">GYM APP</div>
+  @if (!auth.isLoggedIn) {
+    <a
+      routerLink="/login"
+      class="absolute right-4 text-blue-300 hover:underline"
+      >Iniciar sesión</a
+    >
   }
 </header>
